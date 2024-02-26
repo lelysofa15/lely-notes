@@ -1,0 +1,40 @@
+1. buka xampp, klik Config di port Apache, lalu pilih php (php.ini)
+
+2. cari intl extension, lalu hapus tanda ; di depan baris
+ 
+3. install composer
+	- lokasinya di d:\xampp\php\php.exe
+ 
+4. buka cmd, ganti lokasi 
+	- d:
+	- cd xampp\htdocs
+
+5. ketik 
+	composer create-project codeigniter4/appstarter ci-news -vvv
+
+6. kalo udah selesai, ketik 
+	composer install -vvv
+
+6. masuk ke folder yang udah dibuat, ketik
+	php spark serve
+
+7. selesai!!
+
+======================================================================
+
+CARA SETTING PHP KE DATABASE
+
+1. Setting env, copy env namanya jadi .env
+
+2. uncommand #CI_ENVIRONMENT = production# (hilangkan tanda #)
+	ganti production menjadi development
+
+3. search database di env, uncommand ## database
+
+3. setting database jadi database kamu, passwordnya hapus (kalo gapake pw)
+
+4. setting routes di config>routes
+
+5. uncommand //$routes->setAutoRoute(false); (hapus // nya), lalu ubah menjadi true
+
+6. udah deh kayaknya
