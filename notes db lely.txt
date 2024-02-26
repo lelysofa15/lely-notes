@@ -1,0 +1,599 @@
+// Buat Database //
+CREATE DATABASE databasename;
+
+// Hapus Database //
+DROP DATABASE testDB;
+
+// Buat Tabel //
+CREATE TABLE Persons (
+    PersonID int,
+    LastName varchar(255),
+    FirstName varchar(255),
+    Address varchar(255),
+    City varchar(255)
+);
+
+CREATE TABLE TestTable AS
+SELECT customername, contactname
+FROM customers;
+
+// Hapus Tabel //
+DROP TABLE table_name;
+
+// Kosongin Tabel //
+TRUNCATE TABLE table_name;
+
+*** note ***
+> The ALTER TABLE statement is used to add, delete, or modify columns in an existing table.
+> The ALTER TABLE statement is also used to add and drop various constraints on an existing table.
+
+// Tambah kolom di tabel yang sudah ada //
+ALTER TABLE table_name
+ADD column_name datatype;
+
+ALTER TABLE Customers
+ADD Email varchar(255);
+
+ALTER TABLE Customers
+DROP COLUMN Email;
+
+ALTER TABLE table_name
+RENAME COLUMN old_name to new_name;
+
+ALTER TABLE table_name
+MODIFY COLUMN column_name datatype;
+
+*** note ***
+> SQL constraints are used to specify rules for data in a table.
+> Constraints can be specified when the table is created with the CREATE TABLE statement, or after the table is created with the ALTER TABLE statement.
+> The following constraints are commonly used in SQL:
+	NOT NULL - Ensures that a column cannot have a NULL value
+	UNIQUE - Ensures that all values in a column are different
+	PRIMARY KEY - A combination of a NOT NULL and UNIQUE. Uniquely identifies each row in a table
+	FOREIGN KEY - Prevents actions that would destroy links between tables
+	CHECK - Ensures that the values in a column satisfies a specific condition
+	DEFAULT - Sets a default value for a column if no value is specified
+	CREATE INDEX - Used to create and retrieve data from the database very quickly
+
+// NOT NULL //
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255) NOT NULL,
+    Age int
+);
+
+ALTER TABLE Persons
+MODIFY COLUMN Age int NOT NULL;
+
+// UNIQUE //
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    UNIQUE (ID)
+);
+
+To name a UNIQUE constraint, and to define a UNIQUE constraint on multiple columns, use the following SQL syntax:
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    CONSTRAINT UC_Person UNIQUE (ID,LastName)
+);
+
+ALTER TABLE Persons
+ADD UNIQUE (ID);
+
+--- drop unique ---
+ALTER TABLE Persons
+DROP INDEX UC_Person;
+
+// PRIMARY KEY //
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    PRIMARY KEY (ID)
+);
+
+ALTER TABLE Persons
+ADD PRIMARY KEY (ID);
+
+- drop primary key
+ALTER TABLE Persons
+DROP PRIMARY KEY;
+
+// FOREIGN KEY //
+CREATE TABLE Orders (
+    OrderID int NOT NULL,
+    OrderNumber int NOT NULL,
+    PersonID int,
+    PRIMARY KEY (OrderID),
+    FOREIGN KEY (PersonID) REFERENCES Persons(PersonID)
+);
+
+ALTER TABLE Orders
+ADD FOREIGN KEY (PersonID) REFERENCES Persons(PersonID);
+
+// CHECK //
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    CHECK (Age>=18)
+);
+
+ALTER TABLE Persons
+ADD CHECK (Age>=18);
+
+// DEFAULT //
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    City varchar(255) DEFAULT 'Sandnes'
+);
+
+ALTER TABLE Persons
+ALTER City SET DEFAULT 'Sandnes';
+
+ALTER TABLE Persons
+ALTER City DROP DEFAULT;
+
+// INDEX //
+CREATE INDEX index_name
+ON table_name (column1, column2, ...);
+
+CREATE UNIQUE INDEX index_name
+ON table_name (column1, column2, ...);
+
+CREATE INDEX idx_lastname
+ON Persons (LastName);
+
+ALTER TABLE table_name
+DROP INDEX index_name;
+
+// AUTO INCREMENT //
+CREATE TABLE Persons (
+    Personid int NOT NULL AUTO_INCREMENT,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    PRIMARY KEY (Personid)
+);
+
+*** By default, the starting value for AUTO_INCREMENT is 1, and it will increment by 1 for each new record.
+** To let the AUTO_INCREMENT sequence start with another value, use the following SQL statement:
+ALTER TABLE Persons AUTO_INCREMENT=100;
+
+*** note ***
+> In SQL, a view is a virtual table based on the result-set of an SQL statement.
+> A view contains rows and columns, just like a real table. The fields in a view are fields from one or more real tables in the database.
+> You can add SQL statements and functions to a view and present the data as if the data were coming from one single table.
+
+// CREATE VIEW //
+CREATE VIEW view_name AS
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+
+CREATE VIEW [Products Above Average Price] AS
+SELECT ProductName, Price
+FROM Products
+WHERE Price > (SELECT AVG(Price) FROM Products);
+
+- ubah view
+CREATE OR REPLACE VIEW view_name AS
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+
+- hapus view
+DROP VIEW view_name;
+
+// SELECT //
+SELECT * FROM Customers;
+
+SELECT CustomerName, City FROM Customers;
+
+// WHERE //
+SELECT * FROM Customers
+WHERE Country='Mexico';
+
+*** note ***
+# The AND and OR operators are used to filter records based on more than one condition:
+  > The AND operator displays a record if all the conditions separated by AND are TRUE.
+  > The OR operator displays a record if any of the conditions separated by OR is TRUE.
+  > The NOT operator displays a record if the condition(s) is NOT TRUE.
+
+// AND Syntax //
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition1 AND condition2 AND condition3 ...;
+
+SELECT * FROM Customers
+WHERE Country='Germany' AND City='Berlin';
+
+// OR Syntax //
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition1 OR condition2 OR condition3 ...;
+
+SELECT * FROM Customers
+WHERE City='Berlin' OR City='München';
+
+// NOT Syntax //
+SELECT column1, column2, ...
+FROM table_name
+WHERE NOT condition;
+
+SELECT * FROM Customers
+WHERE NOT Country='Germany';
+
+// Combining AND, OR and NOT //
+SELECT * FROM Customers
+WHERE Country='Germany' AND (City='Berlin' OR City='München');
+
+SELECT * FROM Customers
+WHERE NOT Country='Germany' AND NOT Country='USA';
+
+// ORDER BY Syntax //
+SELECT column1, column2, ...
+FROM table_name
+ORDER BY column1, column2, ... ASC|DESC;
+
+SELECT * FROM Customers
+ORDER BY Country;
+
+SELECT * FROM Customers
+ORDER BY Country DESC;
+
+SELECT * FROM Customers
+ORDER BY Country ASC, CustomerName DESC;
+
+// INSERT INTO //
+INSERT INTO table_name (column1, column2, column3, ...)
+VALUES (value1, value2, value3, ...);
+
+INSERT INTO table_name
+VALUES (value1, value2, value3, ...);
+
+// IS NULL Syntax //
+SELECT column_names
+FROM table_name
+WHERE column_name IS NULL;
+
+SELECT CustomerName, ContactName, Address
+FROM Customers
+WHERE Address IS NULL;
+
+// IS NOT NULL Syntax //
+SELECT column_names
+FROM table_name
+WHERE column_name IS NOT NULL;
+
+// UPDATE data //
+UPDATE Customers
+SET ContactName = 'Alfred Schmidt', City= 'Frankfurt'
+WHERE CustomerID = 1;
+
+// DELETE Syntax //
+DELETE FROM table_name WHERE condition;
+
+DELETE FROM Customers WHERE CustomerName='Alfreds Futterkiste';
+
+// LIMIT //
+SELECT column_name(s)
+FROM table_name
+WHERE condition
+LIMIT number;
+
+SELECT * FROM Customers
+LIMIT 3;
+
+SELECT * FROM Customers
+WHERE Country='Germany'
+LIMIT 3;
+
+// MIN //
+SELECT MIN(column_name)
+FROM table_name
+WHERE condition;
+
+SELECT MIN(Price) AS SmallestPrice
+FROM Products;
+
+// MAX //
+SELECT MAX(column_name)
+FROM table_name
+WHERE condition;
+
+SELECT MAX(Price) AS LargestPrice
+FROM Products;
+
+// COUNT //
+SELECT COUNT(column_name)
+FROM table_name
+WHERE condition;
+
+SELECT COUNT(ProductID)
+FROM Products;
+
+// AVERAGE //
+SELECT AVG(column_name)
+FROM table_name
+WHERE condition;
+
+SELECT AVG(Price)
+FROM Products;
+
+// SUM //
+SELECT SUM(column_name)
+FROM table_name
+WHERE condition;
+
+SELECT SUM(Quantity)
+FROM OrderDetails;
+
+-------- The SQL LIKE Operator -----------
+> The LIKE operator is used in a WHERE clause to search for a specified pattern in a column.
+> There are two wildcards often used in conjunction with the LIKE operator:
+> The percent sign (%) represents zero, one, or multiple characters
+> The underscore sign (_) represents one, single character
+
+// LIKE Syntax //
+SELECT column1, column2, ...
+FROM table_name
+WHERE columnN LIKE pattern;
+
+SELECT * FROM Customers
+WHERE CustomerName LIKE 'a%';
+
+SELECT * FROM Customers
+WHERE CustomerName LIKE '%a';
+
+SELECT * FROM Customers
+WHERE CustomerName LIKE '%or%';
+
+// IN Syntax //
+SELECT column_name(s)
+FROM table_name
+WHERE column_name IN (value1, value2, ...);
+
+SELECT * FROM Customers
+WHERE Country IN ('Germany', 'France', 'UK');
+
+SELECT * FROM Customers
+WHERE Country NOT IN ('Germany', 'France', 'UK');
+
+SELECT column_name(s)
+FROM table_name
+WHERE column_name IN (SELECT STATEMENT);
+
+SELECT * FROM Customers
+WHERE Country IN (SELECT Country FROM Suppliers);
+
+// BETWEEN Syntax //
+SELECT column_name(s)
+FROM table_name
+WHERE column_name BETWEEN value1 AND value2;
+
+SELECT * FROM Products
+WHERE Price BETWEEN 10 AND 20;
+
+SELECT * FROM Products
+WHERE Price NOT BETWEEN 10 AND 20;
+
+SELECT * FROM Products
+WHERE Price BETWEEN 10 AND 20
+AND CategoryID NOT IN (1,2,3);
+
+SELECT * FROM Orders
+WHERE OrderDate BETWEEN '1996-07-01' AND '1996-07-31';
+
+// ALIAS //
+SELECT column_name AS alias_name
+FROM table_name;
+
+SELECT column_name(s)
+FROM table_name AS alias_name;
+
+SELECT CustomerID AS ID, CustomerName AS Customer
+FROM Customers;
+
+// JOIN TABLE //
+SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate
+FROM Orders
+INNER JOIN Customers ON Orders.CustomerID=Customers.CustomerID;
+
+*** Tipe-tipe Join Table ***
+Here are the different types of the JOINs in SQL:
+> (INNER) JOIN: Returns records that have matching values in both tables
+> LEFT (OUTER) JOIN: Returns all records from the left table, and the matched records from the right table
+> RIGHT (OUTER) JOIN: Returns all records from the right table, and the matched records from the left table
+> FULL (OUTER) JOIN: Returns all records when there is a match in either left or right table
+
+// INNER JOIN //
+SELECT column_name(s)
+FROM table1
+INNER JOIN table2
+ON table1.column_name = table2.column_name;
+
+- inner join tiga tabel
+SELECT Orders.OrderID, Customers.CustomerName, Shippers.ShipperName
+FROM ((Orders
+INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID)
+INNER JOIN Shippers ON Orders.ShipperID = Shippers.ShipperID);
+
+// LEFT JOIN //
+SELECT column_name(s)
+FROM table1
+LEFT JOIN table2
+ON table1.column_name = table2.column_name;
+
+// RIGHT JOIN //
+SELECT column_name(s)
+FROM table1
+RIGHT JOIN table2
+ON table1.column_name = table2.column_name;
+
+SELECT column_name(s)
+FROM table1
+RIGHT JOIN table2
+ON table1.column_name = table2.column_name;
+
+// FULL OUTER JOIN //
+SELECT column_name(s)
+FROM table1
+FULL OUTER JOIN table2
+ON table1.column_name = table2.column_name
+WHERE condition;
+
+// Self Join //
+SELECT column_name(s)
+FROM table1 T1, table1 T2
+WHERE condition;
+
+// UNION //
+SELECT column_name(s) FROM table1
+UNION
+SELECT column_name(s) FROM table2;
+
+SELECT column_name(s) FROM table1
+UNION ALL
+SELECT column_name(s) FROM table2;
+
+SELECT City FROM Customers
+UNION
+SELECT City FROM Suppliers
+ORDER BY City;
+
+SELECT City, Country FROM Customers
+WHERE Country='Germany'
+UNION
+SELECT City, Country FROM Suppliers
+WHERE Country='Germany'
+ORDER BY City;
+
+SELECT 'Customer' AS Type, ContactName, City, Country
+FROM Customers
+UNION
+SELECT 'Supplier', ContactName, City, Country
+FROM Suppliers;
+
+// GROUP BY //
+SELECT column_name(s)
+FROM table_name
+WHERE condition
+GROUP BY column_name(s)
+ORDER BY column_name(s);
+
+SELECT COUNT(CustomerID), Country
+FROM Customers
+GROUP BY Country;
+
+SELECT COUNT(CustomerID), Country
+FROM Customers
+GROUP BY Country
+ORDER BY COUNT(CustomerID) DESC;
+
+// HAVING //
+SELECT column_name(s)
+FROM table_name
+WHERE condition
+GROUP BY column_name(s)
+HAVING condition
+ORDER BY column_name(s);
+
+SELECT COUNT(CustomerID), Country
+FROM Customers
+GROUP BY Country
+HAVING COUNT(CustomerID) > 5;
+
+SELECT COUNT(CustomerID), Country
+FROM Customers
+GROUP BY Country
+HAVING COUNT(CustomerID) > 5
+ORDER BY COUNT(CustomerID) DESC;
+
+// EXISTS //
+SELECT column_name(s)
+FROM table_name
+WHERE EXISTS
+(SELECT column_name FROM table_name WHERE condition);
+
+SELECT SupplierName
+FROM Suppliers
+WHERE EXISTS (SELECT ProductName FROM Products WHERE Products.SupplierID = Suppliers.supplierID AND Price < 20);
+
+// ANY //
+SELECT column_name(s)
+FROM table_name
+WHERE column_name operator ANY
+  (SELECT column_name
+  FROM table_name
+  WHERE condition);
+
+// ALL //
+SELECT ALL column_name(s)
+FROM table_name
+WHERE condition;
+
+// CASE //
+SELECT OrderID, Quantity,
+CASE
+    WHEN Quantity > 30 THEN 'The quantity is greater than 30'
+    WHEN Quantity = 30 THEN 'The quantity is 30'
+    ELSE 'The quantity is under 30'
+END AS QuantityText
+FROM OrderDetails;
+
+// TRIGGER //
+-mengurangi data
+DELIMITER $$
+CREATE TRIGGER pengurangan_masterVcd
+AFTER INSERT
+ON transaksi_pinjam FOR EACH ROW
+BEGIN
+UPDATE master_vcd SET Jumlah = Jumlah - NEW.Jumlah
+WHERE KdVcd = NEW.KdVcd;
+END;
+
+- menambah data
+DELIMITER $$
+CREATE TRIGGER penambahan_masterVcd
+AFTER INSERT
+ON penerimaan_vcd FOR EACH ROW
+BEGIN
+UPDATE master_vcd SET Jumlah = Jumlah + NEW.Jumlah
+WHERE KdVcd = NEW.KdVcd;
+END;
+
+// PROCEDURE //
+- tambah data
+DELIMITER $$
+CREATE PROCEDURE data_tambah (
+    nama1 VARCHAR(100),
+    jenis_kelamin1 VARCHAR(100),
+    alamat_rumah1 VARCHAR(100)
+)
+BEGIN
+	INSERT INTO mahasiswa (
+        nama,
+        jenis_kelamin,
+        alamat
+)
+	VALUES (
+        nama1,
+        jenis_kelamin1,
+        alamat_rumah1
+        );
+END $$
+
+call data_tambah('Christian Yu', 'Pria', 'Tapos')
