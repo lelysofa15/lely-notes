@@ -1,0 +1,525 @@
+--------------- CARA 1 ---------------
+
+import React, {Component} from 'react';
+import {Text, View} from 'react-native';
+
+export default class Lat01 extends Component {
+  render() {
+    return (
+      <View>
+        <Text>Testing</Text>
+      </View>
+    )
+  }
+}
+
+
+--------------- CARA 2 ---------------
+import React, {Component} from 'react';
+import {Text, View} from 'react-native';
+
+export class Lat01 extends Component {
+  render() {
+    return (
+      <View>
+        <Text>Testing Menampilkan Text</Text>
+      </View>
+    )
+  }
+}
+
+export default Lat01;
+
+--------------- CARA 3 ---------------
+import React from 'react';
+import {Text, View} from 'react-native';
+
+const App = () => {
+
+  return (
+    <View>
+      <Text>SELAMAT DATANG DI REACT NATIVE</Text>
+    </View>
+  )
+}
+
+export default App;
+
+--------------- CONTOH 1 ---------------
+import React, {Component} from 'react';
+import {Text, StyleSheet, View} from 'react-native';
+
+export default class Lat01 extends Component {
+  render() {
+    return (
+      <View style = {{padding : 30}}>
+        <Text>SELAMAT DATANG DI REACT</Text>
+      </View>
+    )
+  }
+}
+
+--------------- PENGGUNAAN STYLE ---------------
+import React, {Component} from 'react';
+import {Text, StyleSheet, View} from 'react-native';
+
+export default class Lat01 extends Component {
+  render() {
+    return (
+      <View style = {styles.view1}>
+        <Text style = {styles.judul}>SELAMAT DATANG DI REACT</Text>
+        <View style = {styles.garis} />
+      </View>
+    )
+  }
+}
+
+const styles = StyleSheet.create({
+  view1 : {padding : 30},
+  judul : { 
+    fontSize : 20,
+    fontWeight : 'bold',
+    color : 'pink',
+    textAlign : 'center'
+  },
+  garis : {
+    borderBottomWidth : 1,
+    marginTop : 10
+  }
+
+})
+
+--------------- PENGGUNAAN STYLE FORM ---------------
+import React, {Component} from 'react';
+import {Text, StyleSheet, View, TextInput} from 'react-native';
+
+export default class Lat01 extends Component {
+  render() {
+    return (
+      <View style = {styles.view1}>
+        <Text style = {styles.judul}>SELAMAT DATANG DI REACT</Text>
+        <View style = {styles.garis} />
+          <Text style = {styles.huruf}>User Name</Text>
+          <TextInput style = {styles.inputan} placeholder = 'Masukan Nama' />
+          <Text style = {styles.huruf}>Password</Text>
+          <TextInput style = {styles.inputan} placeholder = 'Masukan Password' />
+      </View>
+    )
+  }
+}
+
+const styles = StyleSheet.create({
+  view1 : {padding : 30},
+  judul : { 
+    fontSize : 20,
+    fontWeight : 'bold',
+    color : 'pink',
+    textAlign : 'center'
+  },
+  garis : {
+    borderBottomWidth : 1,
+    marginTop : 10
+  },
+  huruf : {
+    fontSize : 17,
+    marginTop : 10
+  },
+  inputan : {
+    borderWidth : 1,
+    borderRadius : 5,
+    backgroundColor : 'aquamarine'
+  }
+
+})
+
+--------------- PENGGUNAAN STYLE FORM 2 ---------------
+
+import React, {Component} from 'react';
+import {Text, StyleSheet, View, TextInput} from 'react-native';
+
+export default class Lat01 extends Component {
+  render() {
+    return (
+      <View style = {styles.view1}>
+        <Text style = {styles.judul}>SELAMAT DATANG DI REACT</Text>
+        <View style = {styles.garis} />
+          <Text style = {styles.huruf}>User Name</Text>
+          <TextInput style = {styles.inputan} placeholder = 'Masukan Nama' />
+          <Text style = {styles.huruf}>Password</Text>
+          <TextInput style = {styles.inputan} placeholder = 'Masukan Password' />
+      </View>
+    )
+  }
+}
+
+const styles = StyleSheet.create({
+  view1 : {padding : 30},
+  judul : { 
+    fontSize : 20,
+    fontWeight : 'bold',
+    color : 'pink',
+    textAlign : 'center'
+  },
+  garis : {
+    borderBottomWidth : 1,
+    marginTop : 10
+  },
+  huruf : {
+    fontSize : 17,
+    marginTop : 10
+  },
+  inputan : {
+    borderWidth : 1,
+    borderRadius : 5,
+    backgroundColor : 'aquamarine'
+  }
+
+})
+
+--------------- PENGGUNAAN STYLE FORM + BUTTON ---------------
+import React, {Component} from 'react';
+import {Text, StyleSheet, View, TextInput, TouchableOpacity} from 'react-native';
+
+export default class Lat01 extends Component {
+  render() {
+    return (
+      <View style = {styles.view1}>
+        <Text style = {styles.judul}>SELAMAT DATANG DI REACT</Text>
+        <View style = {styles.garis} />
+          <Text style = {styles.huruf}>User Name</Text>
+          <TextInput style = {styles.inputan} placeholder = 'Masukan Nama' />
+
+          <Text style = {styles.huruf}>Password</Text>
+          <TextInput style = {styles.inputan} 
+            placeholder = 'Masukan Password' 
+            secureTextEntry = {true}
+          />
+
+        <TouchableOpacity style = {styles.tombol}>
+          <Text style = {styles.textLogin}>LOGIN</Text>
+        </TouchableOpacity>
+
+      </View>
+    )
+  }
+}
+
+const styles = StyleSheet.create({
+  view1 : {padding : 30},
+  judul : { 
+    fontSize : 20,
+    fontWeight : 'bold',
+    color : 'pink',
+    textAlign : 'center'
+  },
+  garis : {
+    borderBottomWidth : 1,
+    marginTop : 10
+  },
+  huruf : {
+    fontSize : 17,
+    marginTop : 10
+  },
+  inputan : {
+    borderWidth : 1,
+    borderRadius : 5,
+    backgroundColor : 'aquamarine',
+  },
+  tombol : {
+    marginTop : 20,
+    backgroundColor : 'blue',
+    padding : 7,
+    borderRadius : 5,
+  },
+  textLogin : {
+    color : 'white',
+    textAlign : 'center'
+  }
+
+})
+
+===============================================
+
+28/03/2023
+
+import React from 'react';
+import {SafeAreaView, View, Text} from 'react-native';
+
+export default function Induk() {
+  return (
+    <SafeAreaView>
+      <Anak/>
+      <Text>Selamat Berbuka</Text>
+    </SafeAreaView>
+    )
+}
+
+export function Anak() {
+  return (
+  <View>
+    <Text>Selamat Sahur</Text>
+  </View>
+  )
+}
+
+====================================
+
+import React from 'react';
+import {SafeAreaView, View, Text} from 'react-native';
+
+export default function Induk() {
+  return (
+    <SafeAreaView>
+      <Anak props="Dewi Jonggol"/>
+      <Text>Selamat Berbuka</Text>
+    </SafeAreaView>
+    )
+}
+
+export function Anak({props}) {
+  return (
+  <View>
+    <Text>Selamat Sahur Saudara {props}</Text>
+  </View>
+  )
+}
+
+======================================
+
+import React from 'react';
+import {SafeAreaView, View, Text} from 'react-native';
+
+export default function Induk() {
+  return (
+    <SafeAreaView>
+      <Anak x="Dewi Jonggol"/>
+      <Anak2 x="Daffa Jonggol"/>
+      <Text>Selamat Berbuka</Text>
+    </SafeAreaView>
+    )
+}
+
+export function Anak({x}) {
+  return (
+  <View>
+    <Text>Selamat Sahur Saudara {x}</Text>
+  </View>
+  )
+}
+
+export function Anak2({x}) {
+  return (
+  <View>
+    <Anak x="Kurniawan Jonggol"/>
+    <Text>Selamat Datang Tuan/Nyonya {x}</Text>
+  </View>
+  )
+}
+
+================================================
+
+import React, {useState} from 'react';
+import {SafeAreaView, View, Text, TouchableOpacity} from 'react-native';
+
+export default function MainProg() {
+  const [nilai, rubahNilai] = useState(0);
+
+  return (
+    <SafeAreaView>
+      <View>
+        <Text style = {{fontSize : 30, color : 'pink', alignSelf : 'center'}}>INCREASE</Text>
+      </View>
+    </SafeAreaView>
+    )
+}
+
+=============================================
+
+import React, {useState} from 'react';
+import {SafeAreaView, View, Text, TouchableOpacity} from 'react-native';
+
+export default function MainProg() {
+  const [nilai, rubahNilai] = useState(0);
+
+  return (
+    <SafeAreaView>
+    <TouchableOpacity onPress = { () => rubahNilai(nilai+1)} >
+      <View>
+        <Text style = {{fontSize : 30, color : 'pink', alignSelf : 'center'}}>INCREASE</Text>
+      </View>
+    </TouchableOpacity>
+
+      <View>
+        <Text style = {{fontSize : 50, color : 'red', alignSelf : 'center'}}>{nilai}</Text>
+      </View>
+
+      <View>
+        <Text style = {{fontSize : 30, color : 'pink', alignSelf : 'center'}}>DECREASE</Text>
+      </View>
+    </SafeAreaView>
+    )
+}
+
+===========================================================
+
+import React, {useState} from 'react';
+import {SafeAreaView, View, Text, TouchableOpacity} from 'react-native';
+
+export default function MainProg() {
+  const [nilai, rubahNilai] = useState(0);
+
+  return (
+    <SafeAreaView>
+    <TouchableOpacity onPress = { () => rubahNilai(nilai+1)} >
+      <View>
+        <Text style = {{fontSize : 30, color : 'pink', alignSelf : 'center'}}>INCREASE</Text>
+      </View>
+    </TouchableOpacity>
+
+      <View>
+        <Text style = {{fontSize : 50, color : 'red', alignSelf : 'center'}}>{nilai}</Text>
+      </View>
+    
+    <TouchableOpacity onPress = { () => rubahNilai(nilai-1)} >
+      <View>
+        <Text style = {{fontSize : 30, color : 'pink', alignSelf : 'center'}}>DECREASE</Text>
+      </View>
+    </TouchableOpacity>
+    </SafeAreaView>
+    )
+}
+
+===============================================
+
+import React, {useState} from 'react';
+import {SafeAreaView, View, Text, TouchableOpacity} from 'react-native';
+
+export default function MainProg() {
+  const [nilai, rubahNilai] = useState(0);
+
+  return (
+    <SafeAreaView>
+    <TouchableOpacity onPress = { () => rubahNilai(nilai+1)} >
+      <View>
+        <Text style = {{fontSize : 30, color : 'pink', alignSelf : 'center'}}>INCREASE</Text>
+      </View>
+    </TouchableOpacity>
+
+      <View>
+        <Text style = {{fontSize : 50, color : 'blue', alignSelf : 'center'}}>{nilai}</Text>
+      </View>
+    
+    <TouchableOpacity onPress = { () => rubahNilai(nilai-1)} >
+      <View>
+        <Text style = {{fontSize : 30, color : 'pink', alignSelf : 'center'}}>DECREASE</Text>
+      </View>
+    </TouchableOpacity>
+
+    <TouchableOpacity onPress = { () => rubahNilai(0)} >
+      <View>
+        <Text style = {{fontSize : 30, color : 'red', alignSelf : 'center'}}>RESET</Text>
+      </View>
+    </TouchableOpacity>
+
+    </SafeAreaView>
+    )
+}
+
+=================================================
+
+Metode 2
+
+import React, {Component} from 'react';
+import {View, Text} from 'react-native';
+
+export default class Induk extends Component {
+  render() {
+    return (
+      <View>
+        <Anak nama="Hyunjin" />
+      </View>
+    )
+  }
+}
+               
+class Anak extends Component {
+  render() {
+    return (
+      <View>
+        <Text>Selamat Datang {this.props.nama}</Text>
+      </View>
+    )
+  }
+}
+
+=========================
+
+import React, { useState } from 'react';
+import { SafeAreaView, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+
+export default function MainProg() {
+  const [nilai, rubahNilai] = useState(0);
+
+  return (
+    <SafeAreaView>
+      <TouchableOpacity onPress={() => rubahNilai(nilai + 1)} style = {styles.tombol}>
+        <View>
+          <Text style={styles.txtinc}>
+            INCREASE
+          </Text>
+        </View>
+      </TouchableOpacity>
+
+      <View>
+        <Text style={styles.txtnilai}>
+          {nilai}
+        </Text>
+      </View>
+
+      <TouchableOpacity onPress={() => rubahNilai(nilai - 1)}>
+        <View>
+          <Text style={styles.txtdec}>
+            DECREASE
+          </Text>
+        </View>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => rubahNilai(0)}>
+        <View>
+          <Text style={styles.txtreset}>
+            RESET
+          </Text>
+        </View>
+      </TouchableOpacity>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  tombol : {
+    marginTop : 20,
+    backgroundColor : 'aqua',
+    padding : 7,
+    borderRadius : 5
+  },
+  txtinc : {
+    fontSize: 30, 
+    color: 'pink', 
+    alignSelf: 'center'
+  },
+  txtnilai : { 
+    fontSize: 50, 
+    color: 'blue', 
+    alignSelf: 'center' 
+  },
+  txtdec : { 
+    fontSize: 30, 
+    color: 'pink', 
+    alignSelf: 'center' 
+  },
+  txtreset : { 
+    fontSize: 30, 
+    color: 'red', 
+    alignSelf: 'center' 
+  }
+})
