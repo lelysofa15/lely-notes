@@ -1,0 +1,70 @@
+npx create-expo-app --template
+
+name file: app01
+
+cd app01
+
+---------update react------------- (opsional)
+npm install -g create-expo-app 
+
+-----------install tailwind------------------------
+npm i nativewind
+npm i --dev tailwindcss@3.3.2
+
+buat bikin tailwind file:
+npx tailwindcss init
+
+-- tailwind.config.js --
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./App.{js,jsx,ts,tsx}", "./screens/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+
+
+-- babel.config.js --
+module.exports = function(api) {
+  api.cache(true);
+  return {
+    presets: ['babel-preset-expo'],
+    plugins: ["nativewind/babel"],
+  };
+};
+
+-- App.js --
+import { StatusBar } from 'expo-status-bar';
+import { Text, View } from 'react-native';
+
+export default function App() {
+  return (
+    <View className="flex-1 items-center justify-center bg-white">
+      <Text>Open up App.js to start working on your app!</Text>
+      <StatusBar style="auto" />
+    </View>
+  );
+}
+
+
+
+--------------- install keperluannya ------------------
+
+npm install @react-navigation/native
+npx expo install react-native-screens react-native-safe-area-context 
+npm install @react-navigation/stack
+npx expo install react-native-gesture-handler
+npm install @react-navigation/native-stack
+npm install react-native-responsive-screen --save
+npx expo install expo-linear-gradient
+npm install react-native-responsive-screen --save
+npm i react-native-heroicons react-native-svg
+
+
+
+npm install react-native-dropdown-select-list
+npm i react-native-radio-buttons-group --save
+npm i react-native-check-box --save
+npm install @react-navigation/drawer
+npx expo install react-native-gesture-handler react-native-reanimated
