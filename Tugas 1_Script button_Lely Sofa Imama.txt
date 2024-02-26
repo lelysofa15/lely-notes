@@ -1,0 +1,87 @@
+import React, { useState } from 'react';
+import { SafeAreaView, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+
+export default function MainProg() {
+  const [nilai, rubahNilai] = useState(0);
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <TouchableOpacity onPress={() => rubahNilai(nilai + 1)} style={styles.tombol}>
+        <View>
+          <Text style={styles.txtinc}>
+            INCREASE
+          </Text>
+        </View>
+      </TouchableOpacity>
+
+      <View>
+        <Text style={styles.txtnilai}>
+          {nilai}
+        </Text>
+      </View>
+
+      <TouchableOpacity onPress={() => rubahNilai(nilai - 1)} style={styles.tombol}>
+        <View>
+          <Text style={styles.txtdec}>
+            DECREASE
+          </Text>
+        </View>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => rubahNilai(0)} style={styles.tombolrst}>
+        <View>
+          <Text style={styles.txtreset}>
+            RESET
+          </Text>
+        </View>
+      </TouchableOpacity>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    marginHorizontal: 20,
+  },
+  tombol: {
+    backgroundColor: '#439A97',
+    padding: 15,
+    borderRadius: 8,
+    marginHorizontal: 90,
+    marginTop: 10,
+  },
+  tombolrst: {
+    backgroundColor: '#62B6B7',
+    padding: 15,
+    marginTop: 10,
+    borderRadius: 8,
+    marginHorizontal: 90,
+  },
+  txtinc: {
+    fontSize: 23,
+    color: '#fff',
+    alignSelf: 'center',
+    textTransform: 'uppercase',
+  },
+  txtnilai: {
+    fontSize: 60,
+    color: '#439A97',
+    alignSelf: 'center',
+    fontWeight: 'bold',
+    padding: 10,
+  },
+  txtdec: {
+    fontSize: 23,
+    color: '#fff',
+    alignSelf: 'center',
+    textTransform: 'uppercase',
+  },
+  txtreset: {
+    fontSize: 23,
+    color: '#fff',
+    alignSelf: 'center',
+    textTransform: 'uppercase',
+  },
+});
